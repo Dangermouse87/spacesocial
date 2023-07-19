@@ -7,9 +7,13 @@
 
 <div class="content">
   {% if user in group.members.all %}
-    <a class="btn btn-danger" href="{url 'groups:leave' slug = group.slug %}"><i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff;"></i> Leave</a>
+    <a class="btn btn-danger" href="{url 'groups:leave' slug = group.slug %}">
+      <i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff;"></i> Leave
+    </a>
   {% else %}
-    <a class="btn btn-danger" href="{url 'groups:leave' slug = group.slug %}"><i class="fa-solid fa-arrow-right-to-bracket" style="color: #ffffff;"></i> Join</a>
+    <a class="btn btn-danger" href="{url 'groups:leave' slug = group.slug %}">
+      <i class="fa-solid fa-arrow-right-to-bracket" style="color: #ffffff;"></i> Join
+    </a>
   {% endif %}
 </div>
 
