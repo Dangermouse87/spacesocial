@@ -21,7 +21,7 @@ This project is like a mini social media site. Users can create groups, and leav
 ## Getting Started
 After cloning the repository
 ```
-cd my_blog
+cd spacesocial
 pip install
 python manage.py runserver
 ```
