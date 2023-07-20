@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'accounts',
     'groups',
     'posts',
-    "django_bootstrap5",
+    "django_bootstrap5"
+    "crispy_forms"
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -119,8 +121,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_DIR = Path.joinpath(BASE_DIR, 'static')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    Path.joinpath(BASE_DIR, 'static'),
+    ]
 
 LOGIN_REDIRECT_URL = 'test'
 LOGOUT_REDIRECT_URL = 'thanks'
@@ -129,3 +133,8 @@ LOGOUT_REDIRECT_URL = 'thanks'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# crispy forms
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
