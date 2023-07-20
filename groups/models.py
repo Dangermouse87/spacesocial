@@ -5,7 +5,7 @@ from django.urls import reverse
 import misaka # allows use of markdown
 
 from django.contrib.auth import get_user_model
-User = get_user_model
+User = get_user_model()
 
 from django import template
 register = template.Library() # for custom template tagging
@@ -17,7 +17,7 @@ class Group(models.Model):
     description_html= models.TextField(editable = False, default = '', blank = True)
     members = models.ManyToManyField(User, through = 'GroupMember')
 
-    def save(self, *args, **kwargs)
+    def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         self.description_html = misaka.html(self.description)
         super().save(*args, **kwargs)
@@ -29,8 +29,8 @@ class Group(models.Model):
         ordering = ['name']
 
 class GroupMember(models.Model):
-    group = models.ForeignKey(Group, related_name = 'memberships')
-    user = models.ForeignKey(User, related_name = 'user_groups')
+    group = models.ForeignKey(Group, related_name = 'memberships', on_delete = models.CASCADE)
+    user = models.ForeignKey(User, related_name = 'user_groups', on_delete = models.CASCADE)
 
     def __str__(self):
         return self.user.username

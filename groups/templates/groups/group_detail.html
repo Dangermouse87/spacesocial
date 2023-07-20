@@ -7,11 +7,11 @@
 
 <div class="content">
   {% if user in group.members.all %}
-    <a class="btn btn-danger" href="{url 'groups:leave' slug = group.slug %}">
+    <a class="btn btn-danger" href="{% url 'groups:leave' slug=group.slug %}">
       <i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff;"></i> Leave
     </a>
   {% else %}
-    <a class="btn btn-danger" href="{url 'groups:leave' slug = group.slug %}">
+    <a class="btn btn-primary" href="{% url 'groups:join' slug=group.slug %}">
       <i class="fa-solid fa-arrow-right-to-bracket" style="color: #ffffff;"></i> Join
     </a>
   {% endif %}
@@ -21,12 +21,12 @@
 
 {% block group_content %}
 
-<div class="col-med-8">
+<div class="col-md-8">
   {% if group.posts.count == 0 %}
     <h2>There are no posts at the moment!</h2>
   {% else %}
     {% for post in group.posts.all %}
-      {% include "posts/_post.html %} <!--injecting a partial into content-->
+      {% include "posts/_post.html" %} <!--injecting a partial into content-->
     {% endfor %}
   {% endif %}
 </div>
