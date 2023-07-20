@@ -25,7 +25,7 @@ class UserPosts(generic.ListView):
 
     def get_queryset(self): # try to fetch posts of a user where post.user == username
         try:
-            self.post.user = User.objects.prefetch_related('posts').get(username__iexact = self.kwargs.get('username'))
+            self.post_user = User.objects.prefetch_related('posts').get(username__iexact = self.kwargs.get('username'))
         except User.DoesNotExist:
             raise Http404
         else:
@@ -42,7 +42,7 @@ class PostDetail(SelectRelatedMixin, generic.DetailView):
 
     def get_queryset(self): # filter post where user == username
         queryset = super().get_queryset()
-        return queryset.filter(user__username_iexact = self.kwargs.get('username'))
+        return queryset.filter(user__username__iexact = self.kwargs.get('username'))
 
 class CreatePost(LoginRequiredMixin, SelectRelatedMixin, generic.CreateView):
     fields = ('message', 'group')
@@ -54,15 +54,15 @@ class CreatePost(LoginRequiredMixin, SelectRelatedMixin, generic.CreateView):
         self.object.save()
         return super().form_valid(form)
 
-class DeletePost(LoginRequiredMixin, SelectRelatedMixin, generic.DeleteView,):
-    model = models.Posts
-    select_related = ('user', 'group')
-    success_url = reverse_lazy('posts:all')
+class DeletePost(LoginRequiredMixin, SelectRelatedMixin, generic.DeleteView):
+    model = models.Post
+    select_related = ("user", "group")
+    success_url = reverse_lazy("posts:all")
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(user_id = self.request.user.id)
+        return queryset.filter(user_id=self.request.user.id)
 
     def delete(self, *args, **kwargs):
-        messages.success(self.request, 'Post Deleted')
+        messages.success(self.request, "Post Deleted")
         return super().delete(*args, **kwargs)

@@ -1,12 +1,12 @@
-{% extends from 'groups/group_base.html' %}
+{% extends 'groups/group_base.html' %}
 
 {% block pre_group %}
-<div class="col-med-4">
+<div class="col-md-4">
   <div class="content">
     {% if user.is_authenticated %}
     <h2>Welcome back
-      <a href="{% url 'posts:for_user' username = user.username %}">
-        @{{ user.username %}}
+      <a href="{% url 'posts:for_user' username=user.username %}">
+        @{{ user.username }}
       </a> <!-- links to user profile!-->
     </h2>
     {% endif %}
@@ -24,26 +24,26 @@
 
 
 {% block group_content %}
-  <div class="col-med-8">
+  <div class="col-md-8">
     <div class="list-group">
       {% for group in object_list %} <!--list of all group objects, from generic list view-->
-      <a class='list-group-item' href="{% url 'groups:single' slug = group.slug %}">
+      <a class='list-group-item' href="{% url 'groups:single' slug=group.slug %}">
         <h3 class="title list-group-item-heading">{{ group.name }}</h3>
         <div class="list-group-item-text container-fluid">
           {{ group.description_html | safe }}
           <div class="row">
-            <div class="col-med-4">
+            <div class="col-md-4">
               <span class="badge">{{ group.members.count }}</span>
               member{{ group.members.count | pluralize }}
             </div>
             <div class="col-md-4">
-              <span class="badge">{{ groups.post.count }}</span>
+              <span class="badge">{{ groups.posts.count }}</span>
               post{{ group.posts.count | pluralize }}
             </div>
           </div>
         </div>
       </a>
-      {% endif %}
+      {% endfor %}
     </div>
   </div>
 {% endblock %}
