@@ -29,7 +29,7 @@ The app should be available on the browser at `http://localhost:8000`
 
 ## Project Structure
 - `spacesocial`:  Contains urls and settings for the project.
-- `accoumts/` - Contains the view, model and url files for the account registration.
+- `accounts` - Contains the view, model and url files for the account registration.
 - `posts`:  Contains the view, model and url files for the posts app.
 - `group`:  Contains view, model and url files for the group app.
 - `static`:  Contains css and javascript files.
